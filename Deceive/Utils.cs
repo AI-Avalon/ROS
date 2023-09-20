@@ -38,7 +38,7 @@ internal static class Utils
             httpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("Deceive", DeceiveVersion));
 
             var response =
-                await httpClient.GetAsync("https://api.github.com/repos/molenzwiebel/Deceive/releases/latest");
+                await httpClient.GetAsync("https://api.github.com/repos/AI-Avalon/ROS/releases/latest");
             var content = await response.Content.ReadAsStringAsync();
             var release = JsonSerializer.Deserialize<JsonNode>(content);
             var latestVersion = release?["tag_name"]?.ToString();

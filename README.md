@@ -1,32 +1,28 @@
-![Deceive Logo](http://i.thijsmolendijk.nl/deceive.png)
+![ROS Logo](https://github.com/AI-Avalon/ROS/blob/main/ROS/Resources/avalon_icon.ico)
 
-[![Discord](https://discordapp.com/api/guilds/249481856687407104/widget.png?style=shield)](https://discord.gg/bfxdsRC)
+[![Discord](https://discord.com/api/guilds/682395433141534728/widget.json)](https://discord.gg/tdsb)
 
-# :tophat: Deceive
+# :tophat: ROS
 
-Deceive allows you to appear offline in League of Legends, VALORANT and Legends of Runeterra without any loss of functionality! Talk to your friends, communicate in champion select and queue up together, all while sneakily appearing offline to all your friends.
+ROSを使えば、League of Legends、VALORANT、Legends of Runeterraの機能を損なうことなく、オフラインでプレイすることができます！フレンドと話したり、チャンピオンセレクトでコミュニケーションをとったり、一緒にキューに入ったり。
 
-Once started, Deceive will be a little icon in your notification tray that allows you to manage your chat presence, whether it be online, offline, or moblie.
+ROSを起動すると、通知トレイに小さなアイコンが表示され、オンライン、オフライン、モバイルを問わず、チャットの存在を管理することができます。
 
 # FAQ
 
-**Where can I download Deceive?**  
-Click the [Releases](https://github.com/molenzwiebel/Deceive/releases) tab at the top to download the latest version.
+**ROSはどこでダウンロードできますか？**  
+[Releases](https://github.com/AI-Avalon/ROS/releases) ☚クリックして最新版をダウンロードしてください。
 
-**Can I still invite people? Can they invite me?**  
-Your friends list will work as normal, which means that you can invite everyone. Your friends will not be able to invite you, even if they enter your name manually.
+**私はまだ人々を招待することができますか？彼らは私を招待できますか？**  
+フレンドリストは通常通り機能しますので、全員を招待することができます。あなたの友達が手動であなたの名前を入力しても、あなたを招待することはできません。
 
-**Can I talk in lobbies/champion/agent select?**  
-Yes, you can talk in lobbies just fine. Only your global "presence" is filtered.
+**ロビー/チャンピオン/エージェント・セレクトで話すことはできますか？**  
+はい、ロビーで話すことはできます。あなたのグローバルな "プレゼンス "だけがフィルタリングされます。
 
-**How do I use Deceive with a specific game?**  
-The first time you launch Deceive, you will be able to choose which game to launch and whether to remember that decision. You can also use the Deceive tray icon to launch a different game.
+**特定のゲームでROSを使うには？**  
+ROSの初回起動時に、起動するゲームとその決定を記憶するかどうかを選択できます。また、ROSのトレイアイコンを使って別のゲームを起動することもできます。
 
-You can also launch Deceive with `lol`, `lor`, or `valorant` as command-line argument to automatically launch your game of choice.
+また、`lol`、`lor`、`valorant`をコマンドライン引数として指定してROSを起動すれば、好きなゲームを自動的に起動できる。
 
-**Is this approved by Riot?**  
-Riot has confirmed that [you won't get banned](https://i.thijsmolendijk.nl/deceive_ok.png) for using Deceive. It may break at any time though.
-
-**I'm more of a visual learner. Do you have a video?**  
-Sure thing! Just click the preview below:  
-[![Youtube Preview](http://img.youtube.com/vi/bfsbtd39GqE/maxresdefault.jpg)](https://youtu.be/bfsbtd39GqE)
+**これはRiotに承認されていますか？**  
+RiotはROSを使用することを技術的に承認してくれました。しかし、いつこのプログラムが機能しなくなる日が来るかもしれません。
