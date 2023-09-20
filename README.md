@@ -1,7 +1,3 @@
-![ROS Logo](https://github.com/AI-Avalon/ROS/blob/main/ROS/Resources/avalon_icon.ico)
-
-[![Discord](https://discord.com/api/guilds/682395433141534728/widget.json)](https://discord.gg/tdsb)
-
 # :tophat: ROS
 
 ROSを使えば、League of Legends、VALORANT、Legends of Runeterraの機能を損なうことなく、オフラインでプレイすることができます！フレンドと話したり、チャンピオンセレクトでコミュニケーションをとったり、一緒にキューに入ったり。
