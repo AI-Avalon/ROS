@@ -220,7 +220,7 @@ internal class MainController : ApplicationContext
                         if (Status == "chat")
                             await SendMessageFromFakePlayerAsync("‚ ‚È‚½‚ÍƒIƒ“ƒ‰ƒCƒ“‚É“oê‚·‚éB");
                         else
-                            await SendMessageFromFakePlayerAsync("You are appearing " + Status + ".");
+                            await SendMessageFromFakePlayerAsync("¡‚ ‚È‚½‚Í " + Status + ".");
                     }
                     else if (content.ToLower().Contains("help"))
                     {

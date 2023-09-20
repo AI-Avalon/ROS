@@ -52,8 +52,8 @@ internal static class StartupHandler
         if (Utils.IsClientRunning() && !(riotClientParams?.Contains("allow-multiple-clients") ?? false))
         {
             var result = MessageBox.Show(
-                "Riotクライアントは現在稼働中です。オンライン状態を隠すには、ROSがRiot Clientを起動する必要があります。" +
-                "ROSにRiotクライアントとそれによって起動されるゲームを停止させ、適切な設定で再起動させたいですか？",
+                "Riotクライアントは現在稼働中です。オンライン状態を隠すには、ROSによってRiot Clientを起動する必要があります。" +
+                "ROSにRiotクライアントとそれによって起動されるゲームを停止させ、適切な設定で再起動しますか？",
                 ROSTitle,
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question,
@@ -126,7 +126,7 @@ internal static class StartupHandler
             LaunchGame.LoR => "bacon",
             LaunchGame.VALORANT => "valorant",
             LaunchGame.RiotClient => null,
-            var x => throw new Exception("Unexpected LaunchGame: " + x)
+            var x => throw new Exception("予期せぬローンチ: " + x)
         };
 
         // Step 3: Start proxy web server for clientconfig
