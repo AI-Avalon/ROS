@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Deceive.Properties {
+namespace ROS.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Deceive.Properties {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Deceive.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ROS.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -73,9 +73,9 @@ namespace Deceive.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
-        public static System.Drawing.Icon DeceiveIcon {
+        public static System.Drawing.Icon ROSIcon {
             get {
-                object obj = ResourceManager.GetObject("DeceiveIcon", resourceCulture);
+                object obj = ResourceManager.GetObject("ROSIcon", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
             }
         }

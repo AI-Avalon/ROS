@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Linq;
-using Deceive.Properties;
+using ROS.Properties;
 
-namespace Deceive;
+namespace ROS;
 
 internal class MainController : ApplicationContext
 {
@@ -20,10 +20,10 @@ internal class MainController : ApplicationContext
     {
         TrayIcon = new NotifyIcon
         {
-            Icon = Resources.DeceiveIcon,
+            Icon = Resources.ROSIcon,
             Visible = true,
-            BalloonTipTitle = StartupHandler.DeceiveTitle,
-            BalloonTipText = "Deceiveは現在、あなたのステータスを隠しています。トレイアイコンを右クリックすると、その他のオプションが表示されます。"
+            BalloonTipTitle = StartupHandler.ROSTitle,
+            BalloonTipText = "ROSは現在、あなたのステータスを隠しています。トレイアイコンを右クリックすると、その他のオプションが表示されます。"
         };
         TrayIcon.ShowBalloonTip(5000);
 
@@ -55,13 +55,13 @@ internal class MainController : ApplicationContext
 
     private void UpdateTray()
     {
-        var aboutMenuItem = new ToolStripMenuItem(StartupHandler.DeceiveTitle) { Enabled = false };
+        var aboutMenuItem = new ToolStripMenuItem(StartupHandler.ROSTitle) { Enabled = false };
 
         EnabledMenuItem = new ToolStripMenuItem("Enabled", null, async (_, _) =>
         {
             Enabled = !Enabled;
             await UpdateStatusAsync(Enabled ? Status : "chat");
-            await SendMessageFromFakePlayerAsync(Enabled ? "Deceiveが有効になりました。" : "Deceiveは無効になりました。");
+            await SendMessageFromFakePlayerAsync(Enabled ? "ROSが有効になりました。" : "ROSは無効になりました。");
             UpdateTray();
         }) { Checked = Enabled };
 
@@ -97,8 +97,8 @@ internal class MainController : ApplicationContext
         var restartWithDifferentGameItem = new ToolStripMenuItem("再起動し、別のゲームを起動する。", null, (_, _) =>
         {
             var result = MessageBox.Show(
-                "Deceiveを再起動して別のゲームを起動しますか？関連するゲームが起動している場合は、それも停止します。",
-                StartupHandler.DeceiveTitle,
+                "ROSを再起動して別のゲームを起動しますか？関連するゲームが起動している場合は、それも停止します。",
+                StartupHandler.ROSTitle,
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question,
                 MessageBoxDefaultButton.Button1
@@ -118,8 +118,8 @@ internal class MainController : ApplicationContext
         var quitMenuItem = new ToolStripMenuItem("Quit", null, (_, _) =>
         {
             var result = MessageBox.Show(
-                "本当にDeceiveを停止しますか？関連するゲームも停止します。",
-                StartupHandler.DeceiveTitle,
+                "本当にROSを停止しますか？関連するゲームも停止します。",
+                StartupHandler.ROSTitle,
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question,
                 MessageBoxDefaultButton.Button1
@@ -186,32 +186,32 @@ internal class MainController : ApplicationContext
                     if (content.ToLower().Contains("offline"))
                     {
                         if (!Enabled)
-                            await SendMessageFromFakePlayerAsync("Deceiveが有効になった。");
+                            await SendMessageFromFakePlayerAsync("ROSが有効になった。");
                         OfflineStatus.PerformClick();
                     }
                     else if (content.ToLower().Contains("mobile"))
                     {
                         if (!Enabled)
-                            await SendMessageFromFakePlayerAsync("Deceiveが有効になった。");
+                            await SendMessageFromFakePlayerAsync("ROSが有効になった。");
                         MobileStatus.PerformClick();
                     }
                     else if (content.ToLower().Contains("online"))
                     {
                         if (!Enabled)
-                            await SendMessageFromFakePlayerAsync("Deceiveが有効になった。");
+                            await SendMessageFromFakePlayerAsync("ROSが有効になった。");
                         ChatStatus.PerformClick();
                     }
                     else if (content.ToLower().Contains("enable"))
                     {
                         if (Enabled)
-                            await SendMessageFromFakePlayerAsync("Deceiveはすでに有効になっている。");
+                            await SendMessageFromFakePlayerAsync("ROSはすでに有効になっている。");
                         else
                             EnabledMenuItem.PerformClick();
                     }
                     else if (content.ToLower().Contains("disable"))
                     {
                         if (!Enabled)
-                            await SendMessageFromFakePlayerAsync("Deceiveはすでに無効になっている。");
+                            await SendMessageFromFakePlayerAsync("ROSはすでに無効になっている。");
                         else
                             EnabledMenuItem.PerformClick();
                     }
@@ -224,7 +224,7 @@ internal class MainController : ApplicationContext
                     }
                     else if (content.ToLower().Contains("help"))
                     {
-                        await SendMessageFromFakePlayerAsync("以下のメッセージを送信することで、Deceiveの設定を素早く変更することができます: online/offline/mobile/enable/disable/status");
+                        await SendMessageFromFakePlayerAsync("以下のメッセージを送信することで、ROSの設定を素早く変更することができます: online/offline/mobile/enable/disable/status");
                     }
 
                     //Don't send anything involving our fake user to chat servers
@@ -276,16 +276,16 @@ internal class MainController : ApplicationContext
                     InsertedFakePlayer = true;
                     Trace.WriteLine("<!--SERVER TO RC ORIGINAL-->" + content);
                     content = content.Insert(content.IndexOf(roster, StringComparison.Ordinal) + roster.Length,
-                        "<item jid='41c322a1-b328-495b-a004-5ccd3e45eae8@eu1.pvp.net' name='&#9;Deceive Active!' subscription='both' puuid='41c322a1-b328-495b-a004-5ccd3e45eae8'>" +
-                        "<group priority='9999'>Deceive</group>" +
+                        "<item jid='41c322a1-b328-495b-a004-5ccd3e45eae8@eu1.pvp.net' name='&#9;ROS Active!' subscription='both' puuid='41c322a1-b328-495b-a004-5ccd3e45eae8'>" +
+                        "<group priority='9999'>ROS</group>" +
                         "<state>online</state>" +
-                        "<id name='Deceive Active!' tagline='...'/>" +
-                        "<lol name='&#9;Deceive Active!'/>" +
-                        "<platforms><riot name='Deceive Active' tagline='...'/></platforms>" +
+                        "<id name='ROS Active!' tagline='...'/>" +
+                        "<lol name='&#9;ROS Active!'/>" +
+                        "<platforms><riot name='ROS Active' tagline='...'/></platforms>" +
                         "</item>");
                     var contentBytes = Encoding.UTF8.GetBytes(content);
                     await Incoming.WriteAsync(contentBytes, 0, contentBytes.Length);
-                    Trace.WriteLine("<!--DECEIVE TO RC-->" + content);
+                    Trace.WriteLine("<!--ROS TO RC-->" + content);
                 }
                 else
                 {
@@ -359,7 +359,7 @@ internal class MainController : ApplicationContext
                 // player with the proper version and avoid "Version Mismatch" from being shown.
                 //
                 // This isn't technically necessary, but people keep coming in and asking whether
-                // the scary red text means Deceive doesn't work, so might as well do this and
+                // the scary red text means ROS doesn't work, so might as well do this and
                 // get a slightly better user experience.
                 if (ValorantVersion is null)
                 {
@@ -390,7 +390,7 @@ internal class MainController : ApplicationContext
 
             var bytes = Encoding.UTF8.GetBytes(sb.ToString());
             await Outgoing.WriteAsync(bytes, 0, bytes.Length);
-            Trace.WriteLine("<!--DECEIVE TO SERVER-->" + sb);
+            Trace.WriteLine("<!--ROS TO SERVER-->" + sb);
         }
         catch (Exception e)
         {
@@ -411,7 +411,7 @@ internal class MainController : ApplicationContext
         var unixTimeMilliseconds = DateTimeOffset.Now.ToUnixTimeMilliseconds();
 
         var presenceMessage =
-            $"<presence from='41c322a1-b328-495b-a004-5ccd3e45eae8@eu1.pvp.net/RC-Deceive' id='b-{randomStanzaId}'>" +
+            $"<presence from='41c322a1-b328-495b-a004-5ccd3e45eae8@eu1.pvp.net/RC-ROS' id='b-{randomStanzaId}'>" +
             "<games>" +
             $"<keystone><st>chat</st><s.t>{unixTimeMilliseconds}</s.t><s.p>keystone</s.p></keystone>" +
             $"<league_of_legends><st>chat</st><s.t>{unixTimeMilliseconds}</s.t><s.p>league_of_legends</s.p><p>{{&quot;pty&quot;:true}}</p></league_of_legends>" + // No Region s.r keeps it in the main "League" category rather than "Other Servers" in every region with "Group Games & Servers" active
@@ -424,7 +424,7 @@ internal class MainController : ApplicationContext
 
         var bytes = Encoding.UTF8.GetBytes(presenceMessage);
         await Incoming.WriteAsync(bytes, 0, bytes.Length);
-        Trace.WriteLine("<!--DECEIVE TO RC-->" + presenceMessage);
+        Trace.WriteLine("<!--ROS TO RC-->" + presenceMessage);
     }
 
     private async Task SendIntroductionTextAsync()
@@ -432,13 +432,13 @@ internal class MainController : ApplicationContext
         if (!InsertedFakePlayer)
             return;
         SentIntroductionText = true;
-        await SendMessageFromFakePlayerAsync("ようこそ Deceiveは実行中であり、あなたは現在表示されている " + Status +
-                                             ". ゲームクライアントの表示とは裏腹に、Deceiveを手動で無効にしない限り、あなたはフレンドにオフラインで表示される。");
+        await SendMessageFromFakePlayerAsync("ようこそ ROSは実行中であり、あなたは現在表示されている " + Status +
+                                             ". ゲームクライアントの表示とは裏腹に、ROSを手動で無効にしない限り、あなたはフレンドにオフラインで表示される。");
         await Task.Delay(200);
         await SendMessageFromFakePlayerAsync(
-            "オフラインの状態で招待したい場合は、Deceiveを無効にして招待する必要があります。相手がロビーに来たら、またDeceiveを有効にしてください。");
+            "オフラインの状態で招待したい場合は、ROSを無効にして招待する必要があります。相手がロビーに来たら、またROSを有効にしてください。");
         await Task.Delay(200);
-        await SendMessageFromFakePlayerAsync("Deceiveを有効または無効にしたり、その他の設定を行うには、トレイアイコンからDeceiveを見つけてください。");
+        await SendMessageFromFakePlayerAsync("ROSを有効または無効にしたり、その他の設定を行うには、トレイアイコンからROSを見つけてください。");
         await Task.Delay(200);
         await SendMessageFromFakePlayerAsync("楽しんでくれ！");
     }
@@ -448,11 +448,11 @@ internal class MainController : ApplicationContext
         var stamp = DateTime.UtcNow.AddSeconds(1).ToString("yyyy-MM-dd HH:mm:ss.fff");
 
         var chatMessage =
-            $"<message from='41c322a1-b328-495b-a004-5ccd3e45eae8@eu1.pvp.net/RC-Deceive' stamp='{stamp}' id='fake-{stamp}' type='chat'><body>{message}</body></message>";
+            $"<message from='41c322a1-b328-495b-a004-5ccd3e45eae8@eu1.pvp.net/RC-ROS' stamp='{stamp}' id='fake-{stamp}' type='chat'><body>{message}</body></message>";
 
         var bytes = Encoding.UTF8.GetBytes(chatMessage);
         await Incoming.WriteAsync(bytes, 0, bytes.Length);
-        Trace.WriteLine("<!--DECEIVE TO RC-->" + chatMessage);
+        Trace.WriteLine("<!--ROS TO RC-->" + chatMessage);
     }
 
     private async Task UpdateStatusAsync(string newStatus)

@@ -1,7 +1,7 @@
-﻿namespace Deceive;
+﻿namespace ROS;
 
 /// <summary>
-///     Which game to automatically launch when Deceive is started.
+///     Which game to automatically launch when ROS is started.
 /// </summary>
 public enum LaunchGame
 {

@@ -7,13 +7,13 @@ using System.Net.Sockets;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Deceive.Properties;
+using ROS.Properties;
 
-namespace Deceive;
+namespace ROS;
 
 internal static class StartupHandler
 {
-    public static string DeceiveTitle => "Deceive " + Utils.DeceiveVersion;
+    public static string ROSTitle => "ROS " + Utils.ROSVersion;
 
     // Arguments are parsed through System.CommandLine.DragonFruit.
     /// <param name="args">The game to be launched, or automatically determined if not passed.</param>
@@ -27,16 +27,16 @@ internal static class StartupHandler
         Application.EnableVisualStyles();
         try
         {
-            await StartDeceiveAsync(args, gamePatchline, riotClientParams, gameParams);
+            await StartROSAsync(args, gamePatchline, riotClientParams, gameParams);
         }
         catch (Exception ex)
         {
             Trace.WriteLine(ex);
-            // Show some kind of message so that Deceive doesn't just disappear.
+            // Show some kind of message so that ROS doesn't just disappear.
             MessageBox.Show(
-                "Deceiveがエラーに遭遇し、正しく初期化できなかった。 " +
+                "ROSがエラーに遭遇し、正しく初期化できなかった。 " +
                 "Discordから制作者にご連絡ください。.\n\n" + ex,
-                DeceiveTitle,
+                ROSTitle,
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Error,
                 MessageBoxDefaultButton.Button1
@@ -45,16 +45,16 @@ internal static class StartupHandler
     }
 
     /// Actual main function. Wrapped into a separate function so we can catch exceptions.
-    private static async Task StartDeceiveAsync(LaunchGame game, string gamePatchline, string? riotClientParams, string? gameParams)
+    private static async Task StartROSAsync(LaunchGame game, string gamePatchline, string? riotClientParams, string? gameParams)
     {
         // Refuse to do anything if the client is already running, unless we're specifically
         // allowing that through League/RC's --allow-multiple-clients.
         if (Utils.IsClientRunning() && !(riotClientParams?.Contains("allow-multiple-clients") ?? false))
         {
             var result = MessageBox.Show(
-                "Riotクライアントは現在稼働中です。オンライン状態を隠すには、DeceiveがRiot Clientを起動する必要があります。" +
-                "DeceiveにRiotクライアントとそれによって起動されるゲームを停止させ、適切な設定で再起動させたいですか？",
-                DeceiveTitle,
+                "Riotクライアントは現在稼働中です。オンライン状態を隠すには、ROSがRiot Clientを起動する必要があります。" +
+                "ROSにRiotクライアントとそれによって起動されるゲームを停止させ、適切な設定で再起動させたいですか？",
+                ROSTitle,
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question,
                 MessageBoxDefaultButton.Button1
@@ -71,7 +71,7 @@ internal static class StartupHandler
             File.WriteAllText(Path.Combine(Persistence.DataDir, "debug.log"), string.Empty);
             Trace.Listeners.Add(new TextWriterTraceListener(Path.Combine(Persistence.DataDir, "debug.log")));
             Debug.AutoFlush = true;
-            Trace.WriteLine(DeceiveTitle);
+            Trace.WriteLine(ROSTitle);
         }
         catch
         {
@@ -94,9 +94,9 @@ internal static class StartupHandler
         if (riotClientPath is null)
         {
             MessageBox.Show(
-                "DeceiveがRiotクライアントへのパスを見つけることができませんでした。通常、Riot Gamesのゲームを一度起動し、Deceiveを再度起動することで解決します。" +
+                "ROSがRiotクライアントへのパスを見つけることができませんでした。通常、Riot Gamesのゲームを一度起動し、ROSを再度起動することで解決します。" +
                 "Discord を通じてバグレポートを提出してください。",
-                DeceiveTitle,
+                ROSTitle,
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Error,
                 MessageBoxDefaultButton.Button1
@@ -146,7 +146,7 @@ internal static class StartupHandler
 
         Trace.WriteLine($"Riotクライアントをパラメータ付きで起動します:\n{startArgs.Arguments}");
         var riotClient = Process.Start(startArgs);
-        // Kill Deceive when Riot Client has exited, so no ghost Deceive exists.
+        // Kill ROS when Riot Client has exited, so no ghost ROS exists.
         if (riotClient is not null)
         {
             ListenToRiotClientExit(riotClient);
@@ -174,10 +174,10 @@ internal static class StartupHandler
         if (chatHost is null)
         {
             MessageBox.Show(
-                "DeceiveはRiotのチャットサーバーを見つけることができませんでした。 " +
-                "この問題が解決せず、Deceiveなしで正常にチャットに接続できる場合、" +
+                "ROSはRiotのチャットサーバーを見つけることができませんでした。 " +
+                "この問題が解決せず、ROSなしで正常にチャットに接続できる場合、" +
                 "Discordでバグ報告をしてください。",
-                DeceiveTitle,
+                ROSTitle,
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Error,
                 MessageBoxDefaultButton.Button1
@@ -214,9 +214,9 @@ internal static class StartupHandler
                     Trace.WriteLine(e);
                     var result = MessageBox.Show(
                         "チャットサーバーに再接続できません。インターネット接続を確認してください。 " +
-                        "If this issue persists and you can connect to chat normally without Deceive, " +
+                        "この問題が解決せず、ROSなしで正常にチャットに接続できる場合, " +
                         "Discordでバグ報告をしてください。",
-                        DeceiveTitle,
+                        ROSTitle,
                         MessageBoxButtons.RetryCancel,
                         MessageBoxIcon.Error,
                         MessageBoxDefaultButton.Button1
@@ -244,18 +244,18 @@ internal static class StartupHandler
         riotClientProcess.EnableRaisingEvents = true;
         riotClientProcess.Exited += async (sender, e) =>
         {
-            Trace.WriteLine("Detected Riot Client exit.");
+            Trace.WriteLine("RiotClientの終了を検出.");
             await Task.Delay(3000); // wait for a bit to ensure this is not a relaunch triggered by the RC
 
             var newProcess = Utils.GetRiotClientProcess();
             if (newProcess is not null)
             {
-                Trace.WriteLine("A new Riot Client process spawned, monitoring that for exits.");
+                Trace.WriteLine("新しいRiotClientプロセスが生成され、終了を監視するようになりました。");
                 ListenToRiotClientExit(newProcess);
             }
             else
             {
-                Trace.WriteLine("No new clients spawned after waiting, killing ourselves.");
+                Trace.WriteLine("待てど暮らせどRiotClientの起動を確認できませんでした。");
                 Environment.Exit(0);
             }
         };

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace Deceive;
+namespace ROS;
 
 internal partial class GamePromptForm : Form
 {
@@ -9,7 +9,7 @@ internal partial class GamePromptForm : Form
 
     internal GamePromptForm() => InitializeComponent();
 
-    private void OnFormLoad(object sender, EventArgs e) => Text = StartupHandler.DeceiveTitle;
+    private void OnFormLoad(object sender, EventArgs e) => Text = StartupHandler.ROSTitle;
 
     private void OnLoLLaunch(object sender, EventArgs e) => HandleLaunchChoiceAsync(LaunchGame.LoL);
 

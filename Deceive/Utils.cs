@@ -11,11 +11,11 @@ using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Deceive;
+namespace ROS;
 
 internal static class Utils
 {
-    internal static string DeceiveVersion
+    internal static string ROSVersion
     {
         get
         {
@@ -27,7 +27,7 @@ internal static class Utils
     }
 
     /**
-     * Asynchronously checks if the current version of Deceive is the latest version.
+     * Asynchronously checks if the current version of ROS is the latest version.
      * If not, and the user has not dismissed the message before, an alert is shown.
      */
     public static async Task CheckForUpdatesAsync()
@@ -35,7 +35,7 @@ internal static class Utils
         try
         {
             var httpClient = new HttpClient();
-            httpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("Deceive", DeceiveVersion));
+            httpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("ROS", ROSVersion));
 
             var response =
                 await httpClient.GetAsync("https://api.github.com/repos/AI-Avalon/ROS/releases/latest");
@@ -47,7 +47,7 @@ internal static class Utils
             if (latestVersion is null)
                 return;
             var githubVersion = new Version(latestVersion.Replace("v", ""));
-            var assemblyVersion = new Version(DeceiveVersion.Replace("v", ""));
+            var assemblyVersion = new Version(ROSVersion.Replace("v", ""));
             // Earlier = -1, Same = 0, Later = 1
             if (assemblyVersion.CompareTo(githubVersion) != -1)
                 return;
@@ -63,10 +63,10 @@ internal static class Utils
             Persistence.SetPromptedUpdateVersion(latestVersion);
 
             var result = MessageBox.Show(
-                $"新バージョンのDeceiveが登場: {latestVersion}. あなたは現在Deceiveを使用しています {DeceiveVersion}. " +
-                "Deceiveのアップデートは通常、致命的なバグを修正したり、Riotによる変更に対応したりするため、最新バージョンをインストールすることをお勧めします。\n\n" +
+                $"新バージョンのROSが登場: {latestVersion}. あなたは現在ROSを使用しています {ROSVersion}. " +
+                "ROSのアップデートは通常、致命的なバグを修正したり、Riotによる変更に対応したりするため、最新バージョンをインストールすることをお勧めします。\n\n" +
                 "OKを押してダウンロードページを表示するか、キャンセルを押して続行します。キャンセルを押してもこのメッセージは表示されませんのでご安心ください。",
-                StartupHandler.DeceiveTitle,
+                StartupHandler.ROSTitle,
                 MessageBoxButtons.OKCancel,
                 MessageBoxIcon.Information,
                 MessageBoxDefaultButton.Button1
@@ -95,10 +95,10 @@ internal static class Utils
     // Return the currently running Riot Client process, or null if none are running.
     public static Process GetRiotClientProcess() => Process.GetProcessesByName("RiotClientServices").FirstOrDefault();
 
-    // Checks if there is a running LCU/LoR/VALORANT/RC or Deceive instance.
+    // Checks if there is a running LCU/LoR/VALORANT/RC or ROS instance.
     public static bool IsClientRunning() => GetProcesses().Any();
 
-    // Kills the running LCU/LoR/VALORANT/RC or Deceive instance, if applicable.
+    // Kills the running LCU/LoR/VALORANT/RC or ROS instance, if applicable.
     public static void KillProcesses()
     {
         foreach (var process in GetProcesses())

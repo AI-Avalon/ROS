@@ -12,7 +12,7 @@ using System.Windows.Forms;
 using EmbedIO;
 using EmbedIO.Actions;
 
-namespace Deceive;
+namespace ROS;
 
 internal class ConfigProxy
 {
@@ -154,7 +154,7 @@ internal class ConfigProxy
                     }
                     catch (Exception e)
                     {
-                        Trace.WriteLine("Error getting player affinity token, using default chat server.");
+                        Trace.WriteLine("デフォルトのチャットサーバーを使用した場合、プレイヤーアフィニティトークンの取得にエラーが発生しました。");
                         Trace.WriteLine(e);
                     }
                 }
@@ -178,10 +178,10 @@ internal class ConfigProxy
 
             // Show a message instead of failing silently.
             MessageBox.Show(
-                "DeceiveはLeague of Legendsの設定ファイルを書き換えることができませんでした。これは通常、Riot側が何かを変更したために起こります。" +
-                "Deceiveの新バージョンがあるかどうかご確認いただくか、Discordを通じて制作者にご連絡ください。\n\n" +
+                "ROSはLeague of Legendsの設定ファイルを書き換えることができませんでした。これは通常、Riot側が何かを変更したために起こります。" +
+                "ROSの新バージョンがあるかどうかご確認いただくか、Discordを通じて制作者にご連絡ください。\n\n" +
                 ex,
-                StartupHandler.DeceiveTitle,
+                StartupHandler.ROSTitle,
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Error,
                 MessageBoxDefaultButton.Button1

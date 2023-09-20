@@ -1,11 +1,11 @@
 ﻿using System;
 using System.IO;
 
-namespace Deceive;
+namespace ROS;
 
 internal static class Persistence
 {
-    internal static readonly string DataDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Deceive");
+    internal static readonly string DataDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "ROS");
 
     private static readonly string UpdateVersionPath = Path.Combine(DataDir, "updateVersionPrompted");
     private static readonly string DefaultLaunchGamePath = Path.Combine(DataDir, "launchGame");
